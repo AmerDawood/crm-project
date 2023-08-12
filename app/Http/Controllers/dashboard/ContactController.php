@@ -4,6 +4,7 @@ namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ContactRequest;
+use App\Models\City;
 use App\Models\Contact;
 use App\Models\Job;
 use Illuminate\Http\Request;
@@ -14,14 +15,16 @@ class ContactController extends Controller
 {
     public function index()
     {
-        $contacts = Contact::all();
+        $contacts = Contact::orderByDesc('id')->paginate(5);
         return view('dashboard.contacts.index',compact('contacts'));
     }
 
 
     public function create(){
         $jobs = Job::all();
-        return view('dashboard.contacts.create',compact('jobs'));
+        $cities = City::all();
+
+        return view('dashboard.contacts.create',compact('jobs','cities'));
     }
 
 

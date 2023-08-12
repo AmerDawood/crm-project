@@ -11,7 +11,7 @@
 
 
 <div class="container-fluid" style="padding-top: 60px">
-    {{-- @if ($errors->any())
+    @if ($errors->any())
 <div class="alert alert-danger">
     <ul>
         @foreach ($errors->all() as $error)
@@ -19,7 +19,7 @@
         @endforeach
     </ul>
 </div>
-@endif --}}
+@endif
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
@@ -69,13 +69,13 @@
                               </div>
 
 
-                              <div class="mb-3">
-                                <label  class="form-label">City</label>
-                                <input type="text" name="city" class="form-control  @error('city') is-invalid @enderror" id="city" aria-describedby="emailHelp">
-                                @error('city')
-                                <small class="invalid-feedback">{{ $message }}</small>
-                                @enderror
-                            </div>
+                              <select class="form-select" name="city_id" aria-label="Default select example">
+                                <option selected>Choose your city from here</option>
+
+                                @foreach ($cities as $city )
+                                <option value="{{ $city->id }}">{{ $city->title }}</option>
+                                @endforeach
+                              </select>
 
                               <div class="mb-3">
                                 <label  class="form-label">Birthday</label>

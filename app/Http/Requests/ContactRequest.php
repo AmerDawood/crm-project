@@ -30,7 +30,7 @@ class ContactRequest extends FormRequest
             // 'user_id' => 'required|exists:users,id',
             'job_id' => 'required|exists:jobs,id',
             'birthday' => 'required',
-            'city' => 'required',
+            'city_id' => 'required|exists:cities,id',
         ];
     }
 }

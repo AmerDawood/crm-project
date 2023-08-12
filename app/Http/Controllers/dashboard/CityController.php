@@ -3,20 +3,22 @@
 namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
+
+use App\Models\City;
 use App\Models\Contact;
-use App\Models\Job;
 use Illuminate\Http\Request;
 
-class JobController extends Controller
+class CityController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
+
     public function index()
     {
-        $jobs = Job::all();
-        return view('dashboard.jobs.index',compact('jobs'));
-
+        $cities = City::all();
+        return view('dashboard.cities.index',compact('cities'));
     }
 
     /**
@@ -24,7 +26,7 @@ class JobController extends Controller
      */
     public function create()
     {
-        return view('dashboard.jobs.create');
+        return view('dashboard.cities.create');
     }
 
     /**
@@ -32,32 +34,36 @@ class JobController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $request->validate([
             'title' => 'required',
         ]);
 
-        Job::create($validatedData);
 
-        return redirect()->route('jobs.index')->with('msg', 'Job Created Successfully');
+        City::create([
+            'title' => $request->title,
+        ]);
+
+
+        return redirect()->route('cities.index')->with('success','City Created Successfuly');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Job $job)
+    public function show(City $city)
     {
 
-        $contacts = Contact::where('job_id','=',$job->id)->get();
+        $contacts = Contact::where('city_id','=',$city->id)->get();
 
 
-        return view('dashboard.jobs.show',compact('contacts'));
+        return view('dashboard.cities.show',compact('contacts'));
 
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(City $city)
     {
         //
     }
@@ -65,7 +71,7 @@ class JobController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, City $city)
     {
         //
     }
@@ -73,14 +79,8 @@ class JobController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(City $city)
     {
-        $job = Job::findOrFail($id);
-
-
-        $job->delete();
-
-        return redirect()->route('jobs.index')->with('success', 'Job Deleted Successfully');
-
+        //
     }
 }

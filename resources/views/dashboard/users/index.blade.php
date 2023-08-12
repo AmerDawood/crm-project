@@ -5,13 +5,13 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800">Contacts</h1>
+        <h1 class="h3 mb-2 text-gray-800">Cities</h1>
 
 
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">My Contacts</h6>
+                <h6 class="m-0 font-weight-bold text-primary">All Cities</h6>
             </div>
             <div class="card-body">
                 @if (session('success'))
@@ -34,25 +34,16 @@
                                             <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
                                                 rowspan="1" colspan="1" aria-sort="ascending"
                                                 aria-label="Name: activate to sort column descending" style="width: 59px;">
-                                                Name</th>
+                                                Title</th>
 
-                                                <th class="sorting sorting_asc" tabindex="0" aria-controls="dataTable"
-                                                rowspan="1" colspan="1" aria-sort="ascending"
-                                                aria-label="Name: activate to sort column descending" style="width: 59px;">
-                                                Image</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" aria-label="Position: activate to sort column ascending"
-                                                style="width: 59px;">Email</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" aria-label="Office: activate to sort column ascending"
-                                                style="width: 129px;">Phone Number</th>
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
-                                                colspan="1" aria-label="Age: activate to sort column ascending"
-                                                style="width: 59px;">City</th>
+
+
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
                                                 colspan="1" aria-label="Start date: activate to sort column ascending"
                                                 style="width: 122px;">Created At</th>
-
+                                                {{-- <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
+                                                colspan="1" aria-label="Start date: activate to sort column ascending"
+                                                style="width: 122px;">Download Link</th> --}}
 
 
                                             <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1"
@@ -61,35 +52,34 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($contacts as $contact)
+                                        @foreach ($users as $user)
                                             <tr class="odd">
-                                                <td class="sorting_1">{{ $contact->id }}</td>
+                                                <td class="sorting_1">{{ $user->id }}</td>
 
-                                                <td>{{ $contact->name }}</td>
+                                                <td>{{ $user->name }}</td>
 
-                                                <td><img height="80px" width="80px" src="{{ Storage::url($contact->image_path) }}" alt=""></td>
-                                                <td>{{ $contact->email }}</td>
-                                                <td>{{ $contact->phone }}</td>
-                                                <td>{{ $contact->city }}</td>
-                                                <td>{{ $contact->created_at }}</td>
+                                                <td>{{ $user->created_at }}</td>
+
+
+
+
 
                                                 <td>
-                                                    <a class="btn btn-sm btn-primary"
-                                                        href="{{ route('contacts.edit',$contact->id) }}"><i class="fas fa-edit"></i></a>
 
-                                                    <form id="delete-form" action="{{ route('contacts.destroy', $contact->id) }}"
-                                                        method="POST" style="display: none;">
+                                                    <form action="{{ route('users.updateType', $user->id) }}" method="post">
                                                         @csrf
-                                                        @method('DELETE')
+                                                        @method('put')
+
+                                                        <select name="type" onchange="this.form.submit()">
+                                                            <option value="user" {{ $user->type === 'user' ? 'selected' : '' }}>User</option>
+                                                            <option value="admin" {{ $user->type === 'admin' ? 'selected' : '' }}>Admin</option>
+                                                        </select>
                                                     </form>
-                                                    <a href="#" class="btn btn-danger btn-sm"
-                                                    onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this file?')) document.getElementById('delete-form').submit();"><i class="fas fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
-                                {{ $contacts->links() }}
                             </div>
                         </div>
 

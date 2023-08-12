@@ -27,6 +27,65 @@
 
 
     <!-- Nav Item - Utilities Collapse Menu -->
+
+
+      {{-- <h1>{{ auth()->user()->type }}</h1> --}}
+
+
+
+
+    @if (auth()->user()->type == 'admin')
+ <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseJobs"
+            aria-expanded="true" aria-controls="collapseJobs">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>Jobs</span>
+        </a>
+        <div id="collapseJobs" class="collapse" aria-labelledby="headingJobs"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Jobs:</h6>
+                <a class="collapse-item" href="{{ route('jobs.create') }}">Add Job</a>
+                <a class="collapse-item" href="{{ route('jobs.index') }}">All Job</a>
+            </div>
+        </div>
+    </li>
+
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCity"
+            aria-expanded="true" aria-controls="collapseCity">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>City</span>
+        </a>
+        <div id="collapseCity" class="collapse" aria-labelledby="headingJobs"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">City:</h6>
+                <a class="collapse-item" href="{{ route('cities.create') }}">Add City</a>
+                <a class="collapse-item" href="{{ route('cities.index') }}">All City</a>
+            </div>
+        </div>
+    </li>
+
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUser"
+            aria-expanded="true" aria-controls="collapseUser">
+            <i class="fas fa-fw fa-wrench"></i>
+            <span>Users</span>
+        </a>
+        <div id="collapseUser" class="collapse" aria-labelledby="headingJobs"
+            data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Users:</h6>
+                {{-- <a class="collapse-item" href="{{ route('cities.create') }}">Add City</a> --}}
+                <a class="collapse-item" href="{{ route('users.index') }}">All Users</a>
+            </div>
+        </div>
+    </li>
+
+    @else
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseContacts"
             aria-expanded="true" aria-controls="collapseContacts">
@@ -44,21 +103,7 @@
     </li>
 
 
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseJobs"
-            aria-expanded="true" aria-controls="collapseJobs">
-            <i class="fas fa-fw fa-wrench"></i>
-            <span>Jobs</span>
-        </a>
-        <div id="collapseJobs" class="collapse" aria-labelledby="headingJobs"
-            data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Jobs:</h6>
-                <a class="collapse-item" href="{{ route('jobs.create') }}">Add Job</a>
-                <a class="collapse-item" href="{{ route('jobs.index') }}">All Job</a>
-            </div>
-        </div>
-    </li>
+    @endif
 
 
 
@@ -74,9 +119,6 @@
 
     <!-- Divider -->
     <hr class="sidebar-divider">
-
-
-
 
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">

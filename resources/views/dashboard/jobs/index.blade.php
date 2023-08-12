@@ -67,6 +67,11 @@
                                                     </form>
                                                     <a href="#" class="btn btn-danger btn-sm"
                                                     onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this file?')) document.getElementById('delete-form').submit();"><i class="fas fa-trash"></i></a>
+
+                                                    <a href="{{ route('jobs.show',$job->id) }}" class="btn btn-success btn-sm"><i class="fas fa-eye"></i></a>
+
+
+
                                                 </td>
                                             </tr>
                                         @endforeach
